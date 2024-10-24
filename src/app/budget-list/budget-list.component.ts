@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { BudgetService } from '../services/budget.service';
+import { Budget } from '../models/budget';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-budget-list',
@@ -7,7 +10,20 @@ import { Component } from '@angular/core';
   templateUrl: './budget-list.component.html',
   styleUrl: './budget-list.component.css',
 })
-export class BudgetListComponent {
+export class BudgetListComponent implements OnInit{
+  private readonly budgetService = inject(BudgetService);
+  private readonly router = inject(Router);
+  budgetLst:Budget[]=[];
+
+  ngOnInit(): void {
+    this.budgetService.getBudgets().subscribe((data)=>{
+      this.budgetLst=data;
+    })
+  }
+
+  checkBudget(id:string|undefined){
+    this.router.navigate(['viewbudget',id]);
+  }
   /* ADDITIONAL DOCS:
     - https://angular.dev/guide/components/lifecycle#
     - https://angular.dev/guide/http/making-requests#http-observables

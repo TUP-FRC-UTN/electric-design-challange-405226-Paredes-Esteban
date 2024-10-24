@@ -1,1 +1,21 @@
 <!-- BUILD IT FROM HERE https://getbootstrap.com/docs/5.3/content/tables/#striped-rows -->
+<div>
+    <table class="table table-striped-columns">
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Modulos</th> 
+            <th scope="col">Acciones</th>     
+        </thead>
+        <tbody>
+            @for (budget of budgetLst; track $index) {
+                <td>budget.id</td>
+                <td>budget.client</td>
+                <td>budget.date</td>
+                <td>budget.items</td>
+                <td (click)="checkBudget(budget.id)"></td>
+            }
+        </tbody>
+      </table>
+</div>
